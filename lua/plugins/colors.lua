@@ -2,5 +2,5 @@
 return {
   "folke/tokyonight.nvim",
   lazy = true,
-  opts = { style = "day" }, -- Theme options: moon, storm, night, day
+  opts = { style = "night" }, -- Theme options: night, day
 }
