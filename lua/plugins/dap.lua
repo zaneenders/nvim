@@ -28,7 +28,6 @@ return {
           args = { "--port", "${port}" },
         },
       }
-
       dap.configurations.swift = {
         {
           name = "Launch Swift Exectuable",
@@ -40,6 +39,26 @@ return {
           cwd = "${workspaceFolder}",
           stopOnEntry = false,
           args = {},
+        },
+      }
+
+      -- Swift Testing
+      dap.adapters.lldb = {
+        type = "executable",
+        command = lldb_dap_path,
+        name = "lldb",
+      }
+      dap.configurations.swift = {
+        {
+          name = "Launch file",
+          type = "lldb",
+          request = "launch",
+          program = function()
+            print("HERE")
+            return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
+          end,
+          cwd = "${workspaceFolder}",
+          stopOnEntry = false,
         },
       }
     end,
