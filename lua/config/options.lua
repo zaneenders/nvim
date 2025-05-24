@@ -4,3 +4,4 @@
 vim.opt.clipboard = "unnamedplus"
 vim.opt.guifont = "HackNerdFontMono-Regular:h12"
 vim.opt.scrolloff = 8
+vim.g.nofsync = true
