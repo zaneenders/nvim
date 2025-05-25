@@ -41,24 +41,13 @@ return {
           args = {},
         },
       }
-
-      -- Swift Testing
-      dap.adapters.lldb = {
-        type = "executable",
-        command = lldb_dap_path,
-        name = "lldb",
-      }
       dap.configurations.swift = {
         {
-          name = "Launch file",
-          type = "lldb",
-          request = "launch",
-          program = function()
-            print("HERE")
-            return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
-          end,
-          cwd = "${workspaceFolder}",
-          stopOnEntry = false,
+          name = "Attach to process",
+          type = "swift",
+          request = "attach",
+          pid = require("dap.utils").pick_process,
+          args = {},
         },
       }
     end,
