@@ -7,3 +7,9 @@ vim.opt.clipboard = "unnamedplus"
 vim.opt.guifont = "HackNerdFontMono-Regular:h12"
 vim.opt.scrolloff = 8
 vim.g.nofsync = true
+
+-- Prevent auto-changing directories
+vim.opt.autochdir = false
+
+-- Disable LazyVim auto root detection - always use current working directory
+vim.g.root_spec = { "cwd" }
