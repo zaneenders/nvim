@@ -30,18 +30,16 @@ return {
       }
       dap.configurations.swift = {
         {
-          name = "Launch Swift Exectuable",
+          name = "Launch Swift Executable",
           type = "swift",
           request = "launch",
           program = function()
-            return vim.fn.input("Path to executuable: ", vim.fn.getcwd() .. "/", "file")
+            return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
           end,
           cwd = "${workspaceFolder}",
           stopOnEntry = false,
           args = {},
         },
-      }
-      dap.configurations.swift = {
         {
           name = "Attach to process",
           type = "swift",
