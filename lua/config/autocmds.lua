@@ -21,3 +21,28 @@ vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
     end
   end,
 })
+
+-- Treat Metal shaders as C++ for syntax highlighting
+vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+  pattern = "*.metal",
+  callback = function()
+    vim.bo.filetype = "cpp"
+  end,
+})
+
+-- Detach LSP clients from Metal buffers: clangd and sourcekit cannot
+-- handle Metal-specific syntax (e.g. metal_stdlib, [[buffer(n)]])
+-- and will spam "invalid AST" errors if left attached.
+vim.api.nvim_create_autocmd("LspAttach", {
+  callback = function(args)
+    local bufname = vim.api.nvim_buf_get_name(args.buf)
+    if bufname:match("%.metal$") then
+      local client = vim.lsp.get_client_by_id(args.data.client_id)
+      if client then
+        vim.schedule(function()
+          vim.lsp.buf_detach_client(args.buf, client.id)
+        end)
+      end
+    end
+  end,
+})
