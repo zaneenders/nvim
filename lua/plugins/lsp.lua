@@ -4,9 +4,11 @@ return {
   opts = {
     ---@type lspconfig.options
     servers = {
-      -- pyright will be automatically installed with mason and loaded with lspconfig
       sourcekit = {},
-      clangd = {},
+      clangd = {
+        -- Use the clangd on PATH; Mason's binary does not support this ARM64 host.
+        mason = false,
+      },
     },
   },
 }
