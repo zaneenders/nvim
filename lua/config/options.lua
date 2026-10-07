@@ -4,17 +4,25 @@
 vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.clipboard = "unnamedplus"
-vim.g.clipboard = {
-  name = "OSC 52",
-  copy = {
-    ["+"] = require("vim.ui.clipboard.osc52").copy("+"),
-    ["*"] = require("vim.ui.clipboard.osc52").copy("*"),
-  },
-  paste = {
-    ["+"] = require("vim.ui.clipboard.osc52").paste("+"),
-    ["*"] = require("vim.ui.clipboard.osc52").paste("*"),
-  },
-}
+-- Use wl-clipboard on local Wayland desktops; retain OSC 52 for SSH and other terminals.
+if
+  vim.env.SSH_CONNECTION
+  or not vim.env.WAYLAND_DISPLAY
+  or vim.fn.executable("wl-copy") == 0
+  or vim.fn.executable("wl-paste") == 0
+then
+  vim.g.clipboard = {
+    name = "OSC 52",
+    copy = {
+      ["+"] = require("vim.ui.clipboard.osc52").copy("+"),
+      ["*"] = require("vim.ui.clipboard.osc52").copy("*"),
+    },
+    paste = {
+      ["+"] = require("vim.ui.clipboard.osc52").paste("+"),
+      ["*"] = require("vim.ui.clipboard.osc52").paste("*"),
+    },
+  }
+end
 vim.opt.guifont = "HackNerdFontMono-Regular:h12"
 vim.opt.scrolloff = 8
 vim.g.nofsync = true

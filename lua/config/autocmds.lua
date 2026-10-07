@@ -17,7 +17,7 @@ vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
     -- Don't change directory when opening Package.swift files
     local filename = vim.fn.expand("%:t")
     if filename == "Package.swift" then
-      vim.cmd("lcd " .. vim.g.nvim_initial_cwd)
+      vim.cmd("lcd " .. vim.fn.fnameescape(vim.g.nvim_initial_cwd))
     end
   end,
 })
