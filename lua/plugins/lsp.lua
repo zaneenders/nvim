@@ -4,9 +4,17 @@ return {
   opts = {
     ---@type lspconfig.options
     servers = {
-      -- pyright will be automatically installed with mason and loaded with lspconfig
-      sourcekit = {},
-      clangd = {},
+      cssls = {},
+      html = {},
+      sourcekit = {
+        -- SourceKit comes from the Swift toolchain on macOS or Linux.
+        mason = false,
+        enabled = vim.fn.executable("sourcekit-lsp") == 1,
+      },
+      clangd = {
+        -- Prefer an existing toolchain; let Mason install clangd when needed.
+        mason = vim.fn.executable("clangd") == 0,
+      },
     },
   },
 }

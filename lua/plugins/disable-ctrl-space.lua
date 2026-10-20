@@ -3,6 +3,8 @@
 return {
   {
     "saghen/blink.cmp",
+    -- LazyVim's completion settings target v1; v2 has breaking API changes.
+    version = "1.*",
     opts = {
       keymap = {
         ["<C-space>"] = false,
