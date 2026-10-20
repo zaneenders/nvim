@@ -3,6 +3,7 @@
     "lazyvim.plugins.extras.dap.core",
     "lazyvim.plugins.extras.editor.fzf",
     "lazyvim.plugins.extras.formatting.prettier",
+    "lazyvim.plugins.extras.lang.lean",
     "lazyvim.plugins.extras.lang.typescript",
     "lazyvim.plugins.extras.test.core"
   ],
