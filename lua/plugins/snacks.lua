@@ -2,6 +2,8 @@ return {
   "folke/snacks.nvim",
   opts = {
     picker = {
+      -- fzf-lua owns vim.ui.select; keep Snacks available for the explorer.
+      ui_select = false,
       hidden = true, -- for hidden files
       ignored = true, -- for .gitignore files
       -- Disable auto root detection to prevent changing cwd to subdirectories
