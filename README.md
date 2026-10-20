@@ -79,7 +79,9 @@ Ctrl-Space is deliberately left unbound in this config.
 
 File search and terminals use the directory from which you launched Neovim.
 Local sessions use Neovim's native clipboard detection on macOS, Wayland, and X11.
-SSH sessions retain the OSC 52 clipboard integration.
+SSH sessions copy to the terminal clipboard using OSC 52; normal `p` pastes text
+copied within the current Neovim session without querying the terminal. Use your
+terminal's paste shortcut for text copied from another application.
 
 ## Maintenance and customization
 

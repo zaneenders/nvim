@@ -5,17 +5,32 @@ vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.clipboard = "unnamedplus"
 -- Let Neovim detect the local clipboard (macOS, Wayland, or X11).
--- Use OSC 52 over SSH to reach the clipboard of the connecting terminal.
+-- Over SSH, copy via OSC 52 but paste from a cache: many terminals block clipboard reads.
 if vim.env.SSH_TTY or vim.env.SSH_CONNECTION then
+  local cached = {
+    ["+"] = { { "" }, "v" },
+    ["*"] = { { "" }, "v" },
+  }
+  local function copy(register)
+    local copy_to_terminal = require("vim.ui.clipboard.osc52").copy(register)
+    return function(lines, regtype)
+      cached[register] = { vim.deepcopy(lines), regtype }
+      copy_to_terminal(lines, regtype)
+    end
+  end
   vim.g.clipboard = {
     name = "OSC 52",
     copy = {
-      ["+"] = require("vim.ui.clipboard.osc52").copy("+"),
-      ["*"] = require("vim.ui.clipboard.osc52").copy("*"),
+      ["+"] = copy("+"),
+      ["*"] = copy("*"),
     },
     paste = {
-      ["+"] = require("vim.ui.clipboard.osc52").paste("+"),
-      ["*"] = require("vim.ui.clipboard.osc52").paste("*"),
+      ["+"] = function()
+        return vim.deepcopy(cached["+"])
+      end,
+      ["*"] = function()
+        return vim.deepcopy(cached["*"])
+      end,
     },
   }
 end
