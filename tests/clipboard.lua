@@ -15,6 +15,7 @@ local function load_options(env)
   vim.env.SSH_TTY = env.SSH_TTY
   vim.env.SSH_CONNECTION = env.SSH_CONNECTION
   vim.env.WAYLAND_DISPLAY = env.WAYLAND_DISPLAY
+  vim.env.TERM_PROGRAM = env.TERM_PROGRAM
   vim.g.clipboard = nil
   vim.g.loaded_clipboard_provider = nil
   writes = {}
@@ -36,6 +37,7 @@ for _, env in ipairs({
   { SSH_TTY = "/dev/pts/1" },
   { SSH_CONNECTION = "192.0.2.1 12345 192.0.2.2 22" },
   { SSH_TTY = "/dev/pts/1", SSH_CONNECTION = "192.0.2.1 12345 192.0.2.2 22", WAYLAND_DISPLAY = "wayland-0" },
+  { TERM_PROGRAM = "rex" },
 }) do
   load_options(env)
   vim.cmd("runtime autoload/provider/clipboard.vim")
@@ -73,4 +75,4 @@ for _, env in ipairs({
   equal({ "cached line", "tail", "cached line" }, vim.api.nvim_buf_get_lines(0, 0, -1, false))
 end
 
-print("Clipboard tests passed (native detection unchanged; SSH caches both registers and register types)")
+print("Clipboard tests passed (native detection unchanged; SSH and Rex cache both registers and register types)")

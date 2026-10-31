@@ -25,7 +25,7 @@ that its Neovim package meets the version requirement. Some distributions name
 the fd executable `fdfind`, which LazyVim also supports.
 
 For a local desktop clipboard, install `wl-clipboard` on Wayland or `xclip` on X11.
-SSH sessions use OSC 52 and require a terminal that supports it.
+SSH and Rex sessions use OSC 52 and require a terminal that supports it.
 
 Install a Nerd Font, such as Hack, and select it in your terminal's font settings
 so icons display correctly. The `guifont` option only affects graphical Neovim clients.
@@ -79,7 +79,7 @@ Ctrl-Space is deliberately left unbound in this config.
 
 File search and terminals use the directory from which you launched Neovim.
 Local sessions use Neovim's native clipboard detection on macOS, Wayland, and X11.
-SSH sessions copy to the terminal clipboard using OSC 52; normal `p` pastes text
+SSH and Rex sessions copy to the terminal clipboard using OSC 52; normal `p` pastes text
 copied within the current Neovim session without querying the terminal. Use your
 terminal's paste shortcut for text copied from another application.
 
