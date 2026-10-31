@@ -5,8 +5,8 @@ vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.clipboard = "unnamedplus"
 -- Let Neovim detect the local clipboard (macOS, Wayland, or X11).
--- Over SSH, copy via OSC 52 but paste from a cache: many terminals block clipboard reads.
-if vim.env.SSH_TTY or vim.env.SSH_CONNECTION then
+-- In SSH and Rex sessions, copy via OSC 52 but paste from a cache: many terminals block clipboard reads.
+if vim.env.SSH_TTY or vim.env.SSH_CONNECTION or vim.env.TERM_PROGRAM == "rex" then
   local cached = {
     ["+"] = { { "" }, "v" },
     ["*"] = { { "" }, "v" },
