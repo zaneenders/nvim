@@ -1,48 +1,70 @@
--- Autocmds are automatically loaded on the VeryLazy event
--- Default autocmds that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/autocmds.lua
---
--- Add any additional autocmds here
--- with `vim.api.nvim_create_autocmd`
---
--- Or remove existing autocmds by their group name (which is prefixed with `lazyvim_` for the defaults)
--- e.g. vim.api.nvim_del_augroup_by_name("lazyvim_wrap_spell")
+local group = vim.api.nvim_create_augroup("user_config", { clear = true })
 
--- Store the initial working directory when nvim starts
-vim.g.nvim_initial_cwd = vim.fn.getcwd()
-
--- Prevent directory changes when opening Package.swift or other project files
-vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
-  pattern = "*.swift",
-  callback = function()
-    -- Don't change directory when opening Package.swift files
-    local filename = vim.fn.expand("%:t")
-    if filename == "Package.swift" then
-      vim.cmd.lcd(vim.g.nvim_initial_cwd)
+vim.api.nvim_create_autocmd("BufWritePre", {
+  group = group,
+  callback = function(event)
+    if vim.g.disable_autoformat or vim.b[event.buf].disable_autoformat then
+      return
+    end
+    if #vim.lsp.get_clients({ bufnr = event.buf, method = "textDocument/formatting" }) > 0 then
+      vim.lsp.buf.format({ bufnr = event.buf, async = false, timeout_ms = 1000 })
     end
   end,
 })
 
--- Treat Metal shaders as C++ for syntax highlighting
-vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
-  pattern = "*.metal",
+vim.api.nvim_create_autocmd("TextYankPost", {
+  group = group,
   callback = function()
-    vim.bo.filetype = "cpp"
+    vim.hl.on_yank()
   end,
 })
 
--- Detach LSP clients from Metal buffers: clangd and sourcekit cannot
--- handle Metal-specific syntax (e.g. metal_stdlib, [[buffer(n)]])
--- and will spam "invalid AST" errors if left attached.
+-- Metal shares C++ highlighting, but must not attach clangd or SourceKit.
+vim.filetype.add({ extension = { metal = "metal" } })
+vim.treesitter.language.register("cpp", "metal")
+vim.api.nvim_create_autocmd("FileType", {
+  group = group,
+  pattern = "metal",
+  callback = function(event)
+    vim.bo[event.buf].syntax = "cpp"
+  end,
+})
+
+vim.diagnostic.config({
+  severity_sort = true,
+  underline = true,
+  virtual_text = { spacing = 2, source = "if_many" },
+  float = { border = "rounded", source = true },
+})
+
 vim.api.nvim_create_autocmd("LspAttach", {
-  callback = function(args)
-    local bufname = vim.api.nvim_buf_get_name(args.buf)
-    if bufname:match("%.metal$") then
-      local client = vim.lsp.get_client_by_id(args.data.client_id)
-      if client then
-        vim.schedule(function()
-          vim.lsp.buf_detach_client(args.buf, client.id)
-        end)
-      end
+  group = group,
+  callback = function(event)
+    local function map(keys, action, desc, mode)
+      vim.keymap.set(mode or "n", keys, action, { buffer = event.buf, desc = desc })
     end
+    map("gd", function()
+      Snacks.picker.lsp_definitions()
+    end, "Go to definition")
+    map("gr", function()
+      Snacks.picker.lsp_references()
+    end, "References")
+    map("gI", function()
+      Snacks.picker.lsp_implementations()
+    end, "Implementations")
+    map("gy", function()
+      Snacks.picker.lsp_type_definitions()
+    end, "Type definition")
+    map("gD", vim.lsp.buf.declaration, "Declaration")
+    map("K", vim.lsp.buf.hover, "Documentation")
+    map("gK", vim.lsp.buf.signature_help, "Signature help")
+    map("<leader>cr", vim.lsp.buf.rename, "Rename symbol")
+    map("<leader>ca", vim.lsp.buf.code_action, "Code action", { "n", "x" })
+    map("<leader>ss", function()
+      Snacks.picker.lsp_symbols()
+    end, "Document symbols")
+    map("<leader>sS", function()
+      Snacks.picker.lsp_workspace_symbols()
+    end, "Workspace symbols")
   end,
 })

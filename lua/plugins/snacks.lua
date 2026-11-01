@@ -1,24 +1,19 @@
 return {
   "folke/snacks.nvim",
+  lazy = false,
+  priority = 1000,
+  dependencies = { "nvim-mini/mini.icons" },
   opts = {
+    explorer = { enabled = true },
     picker = {
-      -- fzf-lua owns vim.ui.select; keep Snacks available for the explorer.
-      ui_select = false,
-      hidden = true, -- for hidden files
-      ignored = true, -- for .gitignore files
-      -- Disable auto root detection to prevent changing cwd to subdirectories
-      root = false,
+      enabled = true,
       sources = {
-        files = { root = false },
-        explorer = { root = false },
-        grep = { root = false },
-        buffers = { root = false },
+        files = { hidden = true, ignored = false },
+        grep = { hidden = true, ignored = false },
+        explorer = { hidden = true, ignored = false },
       },
     },
-    terminal = {
-      -- Prevent terminal from changing directories - always use vim's initial cwd
-      auto_cwd = false,
-      cwd = vim.fn.getcwd(-1, -1),
-    },
+    input = { enabled = true },
+    terminal = { enabled = true },
   },
 }

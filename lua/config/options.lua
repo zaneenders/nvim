@@ -1,8 +1,22 @@
--- Options are automatically loaded before lazy.nvim startup
--- Default options that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/options.lua
--- Add any additional options here
 vim.opt.number = true
 vim.opt.relativenumber = true
+vim.opt.termguicolors = true
+vim.opt.signcolumn = "yes"
+vim.opt.cursorline = true
+vim.opt.expandtab = true
+vim.opt.shiftwidth = 2
+vim.opt.tabstop = 2
+vim.opt.smartindent = true
+vim.opt.ignorecase = true
+vim.opt.smartcase = true
+vim.opt.splitbelow = true
+vim.opt.splitright = true
+vim.opt.undofile = true
+vim.opt.updatetime = 250
+vim.opt.timeoutlen = 400
+vim.opt.laststatus = 3
+vim.opt.statusline = "%f %m%r%=%y  %l:%c  %p%%"
+vim.opt.confirm = true
 vim.opt.clipboard = "unnamedplus"
 -- Let Neovim detect the local clipboard (macOS, Wayland, or X11).
 -- Over SSH, copy via OSC 52 but paste from a cache: many terminals block clipboard reads.
@@ -36,10 +50,6 @@ if vim.env.SSH_TTY or vim.env.SSH_CONNECTION then
 end
 vim.opt.guifont = "HackNerdFontMono-Regular:h12"
 vim.opt.scrolloff = 8
-vim.g.nofsync = true
 
 -- Prevent auto-changing directories
 vim.opt.autochdir = false
-
--- Disable LazyVim auto root detection - always use current working directory
-vim.g.root_spec = { "cwd" }
