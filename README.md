@@ -1,8 +1,9 @@
 # nvim
 
-A standalone Neovim config with 6 plugins, including the plugin manager.
+A standalone Neovim config with 7 plugins, including the plugin manager.
 Snacks provides the file explorer, file picker, live grep, Git views, and Lazygit integration.
 Neovim provides LSP, formatting, diagnostics, the status line, and clipboard integration.
+Trouble provides a persistent diagnostics panel grouped by file.
 The local Night colorscheme, Blink completion, and Tree-sitter highlighting
 complete the setup. There is no LazyVim layer.
 
@@ -86,6 +87,8 @@ The leader is **Space**. `Space sk` opens the searchable shortcut list.
 | `Space cr`, `Space ca` | Rename symbol, code actions |
 | `Space ss`, `Space sS` | Document / workspace symbols |
 | `Space cd`, `Space sd` | Line / project diagnostics |
+| `Space xx` | Toggle diagnostics panel (Trouble) |
+| `Space xX` | Toggle diagnostics panel for the current buffer |
 | `[d`, `]d` | Previous / next diagnostic (Neovim defaults) |
 | `Space cf` | Format file or visual selection |
 | `Space uf` | Toggle format on save |
@@ -101,6 +104,13 @@ The leader is **Space**. `Space sk` opens the searchable shortcut list.
 
 Completion appears while typing. `Ctrl n` / `Ctrl p` select items; Enter accepts.
 Ctrl-Space stays unbound. Blink uses its Lua matcher and needs no native library.
+
+`Space xx` toggles Trouble's panel of diagnostics already reported to Neovim,
+including errors, warnings, hints, and information. The panel updates as diagnostics
+change; it does not scan unopened files. `Space xX` limits the panel to the current
+buffer. Use `Ctrl j` to move into the panel below, Enter to jump to an item, `q`
+to close it, and `?` to see its shortcuts. `Space sd` opens the searchable Snacks
+diagnostics picker.
 
 Formatting uses the attached language server and follows its rules and project
 settings. It runs on save when the server supports formatting; `Space uf` toggles
@@ -127,8 +137,8 @@ shortcut for text copied from other applications.
 - `lua/config/` contains options, shortcuts, startup, and autocmds.
 - `lua/plugins/` contains the explicit plugin setup; edit `lsp.lua` to add servers.
 
-The 6 plugins are lazy.nvim, snacks.nvim, mini.icons, nvim-lspconfig, blink.cmp,
-and nvim-treesitter.
+The 7 plugins are lazy.nvim, snacks.nvim, mini.icons, nvim-lspconfig, blink.cmp,
+nvim-treesitter, and trouble.nvim.
 The lockfile is tracked so this setup can be reproduced on another machine.
 
 On macOS, update the external editor tools with:
