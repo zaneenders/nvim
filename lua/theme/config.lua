@@ -13,6 +13,6 @@ return {
   },
   highlights = {
     -- Direct overrides, for example:
-    -- Comment = { fg = "#737aa2", italic = false },
+    -- Comment = { fg = "#bda7c8", italic = false },
   },
 }

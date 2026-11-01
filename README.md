@@ -140,7 +140,9 @@ npm update --global @vtsls/language-server vscode-langservers-extracted
 
 ## Colors
 
-The colorscheme is local Lua code copied from Tokyo Night's Night variant.
+The colorscheme is local Lua code based on Tokyo Night's Night variant, with
+deeper Easter-inspired accents over near-black charcoal backgrounds: lavender,
+mint, peach, warm gold, dusty pink, and cornflower blue.
 There is no theme plugin dependency or automatic upstream update.
 
 - `lua/theme/palette.lua` contains the base colors.

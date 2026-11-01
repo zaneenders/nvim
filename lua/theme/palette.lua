@@ -1,42 +1,42 @@
 -- Derived from folke/tokyonight.nvim at cdc07ac78467a233fd62c493de29a17e0cf2b2b6.
--- Local modifications: Night-only theme, local modules, and selected plugin highlights.
+-- Local modifications: deeper Easter-inspired accents on near-black backgrounds.
 -- Apache-2.0; see licenses/tokyonight-LICENSE.
 
 -- Edit these base colors; derived colors and highlights use this palette.
 return {
-  bg = "#1a1b26",
-  bg_dark = "#16161e",
-  bg_dark1 = "#0C0E14",
-  bg_highlight = "#292e42",
-  blue = "#7aa2f7",
-  blue0 = "#3d59a1",
-  blue1 = "#2ac3de",
-  blue2 = "#0db9d7",
-  blue5 = "#89ddff",
-  blue6 = "#b4f9f8",
-  blue7 = "#394b70",
-  comment = "#565f89",
-  cyan = "#7dcfff",
-  dark3 = "#545c7e",
-  dark5 = "#737aa2",
-  fg = "#c0caf5",
-  fg_dark = "#a9b1d6",
-  fg_gutter = "#3b4261",
-  green = "#9ece6a",
-  green1 = "#73daca",
-  green2 = "#41a6b5",
-  magenta = "#bb9af7",
-  magenta2 = "#ff007c",
-  orange = "#ff9e64",
-  purple = "#9d7cd8",
-  red = "#f7768e",
-  red1 = "#db4b4b",
-  teal = "#1abc9c",
-  terminal_black = "#414868",
-  yellow = "#e0af68",
+  bg = "#0b0c0e", -- near black
+  bg_dark = "#070809",
+  bg_dark1 = "#040506",
+  bg_highlight = "#171a1f",
+  blue = "#69a9e8", -- cornflower blue
+  blue0 = "#3b4d68",
+  blue1 = "#9fa4ec", -- periwinkle
+  blue2 = "#62b9c9",
+  blue5 = "#9cbddd",
+  blue6 = "#b0cfee",
+  blue7 = "#3d4758",
+  comment = "#818894",
+  cyan = "#69c5c7", -- robin's egg
+  dark3 = "#78818e",
+  dark5 = "#a2aab6",
+  fg = "#e0e2e7", -- soft silver
+  fg_dark = "#b0b7c2",
+  fg_gutter = "#555d69",
+  green = "#83be74", -- spring green
+  green1 = "#6fc0a1", -- mint
+  green2 = "#66aa84",
+  magenta = "#d88db4", -- dusty pink
+  magenta2 = "#c97fb1",
+  orange = "#df9e78", -- deeper peach
+  purple = "#a28bd4", -- lavender
+  red = "#dd8499",
+  red1 = "#e66f8a", -- rose diagnostics
+  teal = "#60b999",
+  terminal_black = "#424954",
+  yellow = "#d6b96f", -- warm gold
   git = {
-    add = "#449dab",
-    change = "#6183bb",
-    delete = "#914c54",
+    add = "#78af85",
+    change = "#889cd1",
+    delete = "#d47b91",
   },
 }
