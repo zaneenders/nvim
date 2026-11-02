@@ -19,8 +19,9 @@ vim.opt.statusline = "%f %m%r%=%y  %l:%c  %p%%"
 vim.opt.confirm = true
 vim.opt.clipboard = "unnamedplus"
 -- Let Neovim detect the local clipboard (macOS, Wayland, or X11).
--- Over SSH, copy via OSC 52 but paste from a cache: many terminals block clipboard reads.
-if vim.env.SSH_TTY or vim.env.SSH_CONNECTION then
+-- Rex can connect remotely without SSH; native tools would use the server's clipboard.
+-- Copy via OSC 52 in Rex/SSH, but cache pastes because clipboard reads may be blocked.
+if vim.env.REX_BLOCK or vim.env.TERM_PROGRAM == "rex" or vim.env.SSH_TTY or vim.env.SSH_CONNECTION then
   local cached = {
     ["+"] = { { "" }, "v" },
     ["*"] = { { "" }, "v" },

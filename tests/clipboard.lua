@@ -15,6 +15,8 @@ local function load_options(env)
   vim.env.SSH_TTY = env.SSH_TTY
   vim.env.SSH_CONNECTION = env.SSH_CONNECTION
   vim.env.WAYLAND_DISPLAY = env.WAYLAND_DISPLAY
+  vim.env.REX_BLOCK = env.REX_BLOCK
+  vim.env.TERM_PROGRAM = env.TERM_PROGRAM
   vim.g.clipboard = nil
   vim.g.loaded_clipboard_provider = nil
   writes = {}
@@ -26,13 +28,16 @@ local function equal(expected, actual)
   assert(vim.deep_equal(expected, actual), "Expected " .. vim.inspect(expected) .. ", got " .. vim.inspect(actual))
 end
 
-for _, env in ipairs({ {}, { WAYLAND_DISPLAY = "wayland-0" } }) do
+for _, env in ipairs({ {}, { WAYLAND_DISPLAY = "wayland-0" }, { TERM_PROGRAM = "ghostty" } }) do
   load_options(env)
   assert(vim.g.clipboard == nil, "Local sessions must retain native clipboard detection")
   equal({}, writes)
 end
 
 for _, env in ipairs({
+  { REX_BLOCK = "block:test" },
+  { TERM_PROGRAM = "rex" },
+  { REX_BLOCK = "block:test", TERM_PROGRAM = "rex" },
   { SSH_TTY = "/dev/pts/1" },
   { SSH_CONNECTION = "192.0.2.1 12345 192.0.2.2 22" },
   { SSH_TTY = "/dev/pts/1", SSH_CONNECTION = "192.0.2.1 12345 192.0.2.2 22", WAYLAND_DISPLAY = "wayland-0" },
@@ -73,4 +78,4 @@ for _, env in ipairs({
   equal({ "cached line", "tail", "cached line" }, vim.api.nvim_buf_get_lines(0, 0, -1, false))
 end
 
-print("Clipboard tests passed (native detection unchanged; SSH caches both registers and register types)")
+print("Clipboard tests passed (native detection unchanged; Rex/SSH cache both registers and register types)")

@@ -124,9 +124,11 @@ Hidden files are shown, and `.gitignore` is respected. In the explorer, `H`
 toggles hidden files and `I` toggles ignored files; in file/grep pickers, use
 `Alt h` and `Alt i`.
 
-Local clipboard detection works normally. Over SSH, OSC 52 copies to your
-terminal, and pastes within Neovim use the session cache. Use the terminal's paste
-shortcut for text copied from other applications.
+Local clipboard detection works normally. In Rex or over SSH, OSC 52 copies to
+your terminal, and pastes within Neovim use the session cache. Rex's own remote
+connections do not set SSH variables, so Rex is detected separately to avoid
+using the server's clipboard. Use the terminal's paste shortcut (`Cmd-V` in Rex
+on macOS) for text copied from other applications; `p` uses the session cache.
 
 ## Maintenance
 
