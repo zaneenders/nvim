@@ -81,6 +81,7 @@ The leader is **Space**. `Space sk` opens the searchable shortcut list.
 | `Space e`, `Space fe` | File explorer |
 | `Space ,` | Switch open buffers |
 | `Shift h` / `Shift l` | Previous / next buffer |
+| `za` | Toggle Tree-sitter code fold under cursor |
 | `Space bd` | Close buffer while preserving windows |
 | `gd`, `gr`, `gI`, `gy` | Definition, references, implementations, type definition |
 | `K`, `gK` | Documentation, signature help |
@@ -104,6 +105,9 @@ The leader is **Space**. `Space sk` opens the searchable shortcut list.
 
 Completion appears while typing. `Ctrl n` / `Ctrl p` select items; Enter accepts.
 Ctrl-Space stays unbound. Blink uses its Lua matcher and needs no native library.
+
+Files start with folds open. Use `za` to toggle a code fold, `zM` to close all
+folds, and `zR` to open all folds.
 
 `Space xx` toggles Trouble's panel of diagnostics already reported to Neovim,
 including errors, warnings, hints, and information. The panel updates as diagnostics

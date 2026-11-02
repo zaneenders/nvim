@@ -52,5 +52,11 @@ end
 vim.opt.guifont = "HackNerdFontMono-Regular:h12"
 vim.opt.scrolloff = 8
 
+-- Use Tree-sitter folds with the built-in z commands; open files unfolded.
+vim.opt.foldmethod = "expr"
+vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+vim.opt.foldlevel = 99
+vim.opt.foldlevelstart = 99
+
 -- Prevent auto-changing directories
 vim.opt.autochdir = false
