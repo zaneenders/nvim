@@ -14,6 +14,7 @@ vim.opt.splitright = true
 vim.opt.undofile = true
 vim.opt.updatetime = 250
 vim.opt.timeoutlen = 400
+vim.opt.cmdheight = 0
 vim.opt.laststatus = 3
 vim.opt.statusline = "%f %m%r%=%y  %l:%c  %p%%"
 vim.opt.confirm = true
