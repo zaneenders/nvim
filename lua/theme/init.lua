@@ -11,7 +11,17 @@ function M.load()
   local opts = require("theme.config")
   local colors = require("theme.colors").setup(opts)
   local groups = {}
-  for _, name in ipairs({ "base", "kinds", "semantic_tokens", "treesitter", "snacks", "blink", "mini_icons", "lazy" }) do
+  for _, name in ipairs({
+    "base",
+    "kinds",
+    "semantic_tokens",
+    "treesitter",
+    "snacks",
+    "blink",
+    "mini_icons",
+    "gitsigns",
+    "lazy",
+  }) do
     for group, value in pairs(require("theme.groups." .. name).get(colors, opts)) do
       groups[group] = value
     end

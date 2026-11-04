@@ -1,9 +1,11 @@
 # nvim
 
-A standalone Neovim config with 7 plugins, including the plugin manager.
+A standalone Neovim config with 9 plugins, including the plugin manager.
 Snacks provides the file explorer, file picker, live grep, Git views, and Lazygit integration.
 Neovim provides LSP, formatting, diagnostics, the status line, and clipboard integration.
 Trouble provides a persistent diagnostics panel grouped by file.
+Gitsigns marks added, changed, deleted, and untracked lines in the gutter.
+Bufferline shows open buffers as clickable tabs along the top.
 The local Night colorscheme, Blink completion, and Tree-sitter highlighting
 complete the setup. There is no LazyVim layer.
 
@@ -102,6 +104,12 @@ Ctrl-Space stays unbound. Blink uses its Lua matcher and needs no native library
 Files start with folds open. Use `za` to toggle a code fold, `zM` to close all
 folds, and `zR` to open all folds.
 
+The top bar shows open buffers with file icons and a dot for unsaved changes.
+Click a tab or use `Shift h` / `Shift l` to switch buffers. Click its close button,
+right-click the tab, or use `Space bd` to close it; modified buffers prompt to save.
+Git changes appear in the gutter as colored bars (added or changed lines), marks
+for deleted lines, and dotted bars for untracked files.
+
 `Space xx` toggles Trouble's panel of diagnostics already reported to Neovim,
 including errors, warnings, hints, and information. The panel updates as diagnostics
 change; it does not scan unopened files. `Space xX` limits the panel to the current
@@ -137,8 +145,8 @@ on macOS) for text copied from other applications; `p` uses the session cache.
 - `lua/config/` contains options, shortcuts, startup, and autocmds.
 - `lua/plugins/` contains the explicit plugin setup; edit `lsp.lua` to add servers.
 
-The 7 plugins are lazy.nvim, snacks.nvim, mini.icons, nvim-lspconfig, blink.cmp,
-nvim-treesitter, and trouble.nvim.
+The 9 plugins are lazy.nvim, snacks.nvim, mini.icons, nvim-lspconfig, blink.cmp,
+nvim-treesitter, trouble.nvim, gitsigns.nvim, and bufferline.nvim.
 The lockfile is tracked so this setup can be reproduced on another machine.
 
 On macOS, update the external editor tools with:
