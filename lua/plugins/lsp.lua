@@ -5,29 +5,10 @@ return {
   config = function()
     vim.lsp.config("*", { capabilities = require("blink.cmp").get_lsp_capabilities() })
     local servers = {
-      lua_ls = {
-        settings = {
-          Lua = {
-            runtime = { version = "LuaJIT" },
-            diagnostics = { globals = { "vim", "Snacks" } },
-            workspace = { checkThirdParty = false, library = { vim.env.VIMRUNTIME } },
-            completion = { callSnippet = "Replace" },
-          },
-        },
-      },
-      vtsls = {
-        settings = { vtsls = { autoUseWorkspaceTsdk = true } },
-      },
-      html = {},
-      cssls = {},
       clangd = {},
     }
 
     local binaries = {
-      lua_ls = "lua-language-server",
-      vtsls = "vtsls",
-      html = "vscode-html-language-server",
-      cssls = "vscode-css-language-server",
       clangd = "clangd",
     }
     local missing = {}

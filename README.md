@@ -18,7 +18,6 @@ Install these command-line dependencies and make their executables available on 
 | ripgrep | `rg` | Live grep |
 | fd | `fd` or `fdfind` | File search and recursive explorer search |
 | Lazygit | `lazygit` | Git interface at `Space gg` |
-| Node.js and npm | `node`, `npm` | Install and run the web language servers |
 | Tree-sitter CLI | `tree-sitter` 0.26.1+ | Build syntax parsers |
 | C compiler, curl, tar | `cc`, `curl`, `tar` | Download and compile parsers |
 
@@ -28,14 +27,12 @@ There is no separate formatter dependency.
 On macOS:
 
 ```sh
-brew install neovim node ripgrep fd tree-sitter-cli lazygit lua-language-server
-npm install --global @vtsls/language-server vscode-langservers-extracted
+brew install neovim ripgrep fd tree-sitter-cli lazygit
 xcode-select --install # if the command-line tools are not already installed
 ```
 
-On Linux, install Neovim, Node/npm, ripgrep, fd, Lazygit, the Tree-sitter CLI,
-lua-language-server, and clangd with your package manager, then run the
-same npm command above. Check the required versions and ensure all executables
+On Linux, install Neovim, ripgrep, fd, Lazygit, the Tree-sitter CLI,
+and clangd with your package manager. Check the required versions and ensure all executables
 are on PATH. For a desktop clipboard, install `wl-clipboard` on Wayland or `xclip`
 on X11. A Nerd Font is optional; select one in your terminal for file icons.
 
@@ -55,10 +52,6 @@ required server executables. Restart Neovim after installing tools.
 
 | Language | Server | Installation |
 | --- | --- | --- |
-| TypeScript / JavaScript / JSX / TSX | VTSLS | npm: `@vtsls/language-server` |
-| HTML | HTML language server | npm: `vscode-langservers-extracted` |
-| CSS / SCSS / Less | CSS language server | npm: `vscode-langservers-extracted` |
-| Lua | lua-language-server | Homebrew or your system package manager |
 | C / C++ / Objective-C | clangd | Your toolchain or system package manager |
 | Swift | sourcekit-lsp | Your Swift toolchain |
 
@@ -118,8 +111,9 @@ diagnostics picker.
 
 Formatting uses the attached language server and follows its rules and project
 settings. It runs on save when the server supports formatting; `Space uf` toggles
-it and `Space cf` formats the file or visual selection manually. JSON, YAML, and
-Markdown have no configured language server, so they save unchanged.
+it and `Space cf` formats the file or visual selection manually. Languages other
+than C, C++, Objective-C, and Swift have no configured language server, so they
+save unchanged.
 
 Search, the explorer, Git views, and terminals use Neovim's global working
 directory. Change it with `:cd`; opening files never guesses a new project
@@ -137,7 +131,7 @@ on macOS) for text copied from other applications; `p` uses the session cache.
 ## Maintenance
 
 - `:Lazy` manages plugins; `:Lazy restore` restores the committed lockfile.
-- Manage language servers through Homebrew/npm or your system package manager.
+- Manage language servers through your toolchain or system package manager.
 - `:TSUpdate` updates installed syntax parsers.
 - `:checkhealth snacks` and `:checkhealth vim.lsp` diagnose missing tools.
 - `lua/config/` contains options, shortcuts, startup, and autocmds.
@@ -150,8 +144,7 @@ The lockfile is tracked so this setup can be reproduced on another machine.
 On macOS, update the external editor tools with:
 
 ```sh
-brew upgrade lua-language-server tree-sitter-cli
-npm update --global @vtsls/language-server vscode-langservers-extracted
+brew upgrade tree-sitter-cli
 ```
 
 ## Colors
