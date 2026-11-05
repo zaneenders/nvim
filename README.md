@@ -92,7 +92,6 @@ accents. Its LazyVim plugin integrations use the same palette.
 Edit that file to change the base colors, then restart Neovim to apply them.
 `lua/plugins/colors.lua` selects `tokyonight-night` and supplies the palette before
 Tokyo Night computes the derived colors for diagnostics, diffs, and the UI.
-The upstream Apache-2.0 license is preserved in `licenses/tokyonight-LICENSE`.
 
 ## Maintenance and customization
 

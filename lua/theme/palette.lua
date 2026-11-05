@@ -1,6 +1,6 @@
 -- Derived from folke/tokyonight.nvim at cdc07ac78467a233fd62c493de29a17e0cf2b2b6.
 -- Local modifications: deeper Easter-inspired accents on near-black backgrounds.
--- Apache-2.0; see licenses/tokyonight-LICENSE.
+-- Apache-2.0; see LICENSE.
 
 -- Edit these base colors; derived colors and highlights use this palette.
 return {
