@@ -83,6 +83,16 @@ SSH and Rex sessions copy to the terminal clipboard using OSC 52; normal `p` pas
 copied within the current Neovim session without querying the terminal. Use your
 terminal's paste shortcut for text copied from another application.
 
+## Colors
+
+Tokyo Night uses the local palette from `lua/theme/palette.lua`: near-black
+backgrounds with lavender, mint, peach, warm gold, dusty pink, and cornflower blue
+accents. Its LazyVim plugin integrations use the same palette.
+
+Edit that file to change the base colors, then restart Neovim to apply them.
+`lua/plugins/colors.lua` selects `tokyonight-night` and supplies the palette before
+Tokyo Night computes the derived colors for diagnostics, diffs, and the UI.
+
 ## Maintenance and customization
 
 - `:Lazy` manages plugins; `:LazyHealth` loads plugins and checks the setup.
