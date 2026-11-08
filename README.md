@@ -66,6 +66,7 @@ The leader key is **Space**. Press Space in normal mode and pause to see availab
 | `Space ,` | Switch open buffers |
 | `gd` | Go to definition |
 | `K` | Documentation under the cursor |
+| `Space cd` | Full diagnostics for the current line |
 | `Space cr` | Rename symbol |
 | `Space cf` | Format file or selection |
 | `Space gg` | Open LazyGit |
@@ -76,6 +77,11 @@ The leader key is **Space**. Press Space in normal mode and pause to see availab
 Formatting runs on save. `Space uf` toggles automatic formatting. Completion appears
 while typing; use `Ctrl n` / `Ctrl p` to select an item and Enter to accept it.
 Ctrl-Space is deliberately left unbound in this config.
+
+Messages in the Trouble diagnostics panel wrap at word boundaries. Diagnostics
+below the current line wrap using Neovim's built-in display and the local code in
+`lua/config/diagnostics.lua`.
+Press `Space cd` to open the current line's diagnostics in a wrapped popup.
 
 File search and terminals use the directory from which you launched Neovim.
 Local sessions use Neovim's native clipboard detection on macOS, Wayland, and X11.
