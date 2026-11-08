@@ -1,7 +1,14 @@
 return {
   "neovim/nvim-lspconfig",
+  init = function()
+    require("config.diagnostics").setup()
+  end,
   ---@class PluginLspOpts
   opts = {
+    diagnostics = {
+      virtual_text = false,
+      virtual_lines = { current_line = true },
+    },
     ---@type lspconfig.options
     servers = {
       cssls = {},
