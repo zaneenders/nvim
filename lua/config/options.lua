@@ -2,7 +2,7 @@
 -- Default options that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/options.lua
 -- Add any additional options here
 vim.opt.number = true
-vim.opt.relativenumber = true
+vim.opt.relativenumber = false
 vim.opt.clipboard = "unnamedplus"
 -- Let Neovim detect the local clipboard (macOS, Wayland, or X11).
 -- In SSH and Rex sessions, copy via OSC 52 but paste from a cache: many terminals block clipboard reads.
