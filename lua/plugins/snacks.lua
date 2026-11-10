@@ -10,7 +10,12 @@ return {
       root = false,
       sources = {
         files = { root = false },
-        explorer = { root = false },
+        explorer = {
+          root = false,
+          layout = {
+            layout = { width = 25, min_width = 25 },
+          },
+        },
         grep = { root = false },
         buffers = { root = false },
       },
